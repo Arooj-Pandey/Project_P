@@ -35,7 +35,7 @@ def load_llm():
         google_api_key=google_api_key,
         temperature=0.01,
     )
-    return llm
+    return llm 
 
 # Create a custom RAG (Retrieve and Generate) chain
 def create_rag_chain(vector_store, llm):
