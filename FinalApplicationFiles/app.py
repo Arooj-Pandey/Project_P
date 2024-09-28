@@ -20,13 +20,13 @@ def initialize_system():
     retriever = retrieve_documents(vector_store)
     llm = initialize_llm(gemini_api_key)
     rag_chain = create_rag_chain(retriever, llm)
-    return rag_chain
+    return rag_chain, retriever
 
 def main():
     st.title("Ask Questions using RAG (Retrieval-Augmented Generation)")
 
     # Initialize the system (embeddings, retriever, LLM, RAG chain)
-    rag_chain = initialize_system()
+    rag_chain, chunk = initialize_system()
 
     # User input for questions
     question = st.text_input("Enter your question:")
@@ -37,11 +37,13 @@ def main():
             # Use the RAG chain to generate an answer
             with st.spinner("Generating answer..."):
                 answer = rag_chain.invoke(question)
+                
                 st.success("Answer generated!")
 
                 # Display the question and answer using markdown
                 st.markdown(f"### Question: \n{question}")
                 st.markdown(f"### Answer: \n{answer}")
+                st.markdown(f"### Answer: \n{chunk.invoke(question)}")
 
         else:
             st.warning("Please enter a question.")

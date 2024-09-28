@@ -23,7 +23,10 @@ def retrieve_documents(vector_store):
     Converts the vector store into a retriever with specific search criteria.
     Returns the retriever object.
     """
+    # return vector_store.as_retriever(
+    #     search_type="similarity_score_threshold",
+    #     search_kwargs={"k": 6, "score_threshold": 0.8},  # Search top 4 results with a threshold
+    # )
     return vector_store.as_retriever(
-        search_type="similarity_score_threshold",
-        search_kwargs={"k": 4, "score_threshold": 0.7},  # Search top 4 results with a threshold
+         search_kwargs={"k": 2},
     )
