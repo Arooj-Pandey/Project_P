@@ -12,11 +12,11 @@ def chunker(Main_file_path, chunk_size = 1000 , chunk_overlap = 200):
         for j in os.listdir(os.path.join(Main_file_path, i)):
             for k in os.listdir(os.path.join(Main_file_path, i , j)):
                 try:
-                    if k.endswith(".txt"):
+                    if k.endswith('.txt'):
                         file_path = os.path.join(Main_file_path, i , j, k)
                         
                         # Create loader and load the document
-                        loader = TextLoader(file_path)
+                        loader = TextLoader(file_path, encoding='utf-8')
                         doc = loader.load()[0]
                         
                         # Add metadata (e.g., filename or custom data)

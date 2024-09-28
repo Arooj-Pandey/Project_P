@@ -39,9 +39,11 @@ def main():
         
         # Use the chain to generate an answer
         ans = rag_chain.invoke(question)
+    
 
         # Print the generated answer
         print(f"Answer: {ans}")
+
         print("\n")  # Blank line between questions
 
 if __name__ == "__main__":
