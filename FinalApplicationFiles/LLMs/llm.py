@@ -1,6 +1,6 @@
 from langchain_google_genai import GoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import StrOutputParser 
 from langchain_core.runnables import RunnablePassthrough
 
 def initialize_llm(api_key):
