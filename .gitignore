@@ -1,3 +1,5 @@
 .env
 ScraperFiles
 .venv
+__pycache__
+ScraperFiles.zip

@@ -1,9 +1,9 @@
 # Import necessary libraries
 from dotenv import load_dotenv
 import os
-from embeddings import initialize_embeddings
-from pinecone_setup import setup_pinecone, retrieve_documents
-from llm import initialize_llm, create_rag_chain
+from Project_P.FinalApplicationFiles.embeddings.embeddings import initialize_embeddings # Self-defined function
+from Project_P.FinalApplicationFiles.VectorDB.pinecone_setup import setup_pinecone, retrieve_documents # Self-defined function
+from Project_P.FinalApplicationFiles.LLMs.llm import initialize_llm, create_rag_chain # Self-defined funtions
 
 # Load environment variables from .env file
 load_dotenv()
