@@ -1,9 +1,9 @@
 import streamlit as st
 from dotenv import load_dotenv
 import os
-from Project_P.FinalApplicationFiles.embeddings.embeddings import initialize_embeddings
-from Project_P.FinalApplicationFiles.VectorDB.pinecone_setup import setup_pinecone, retrieve_documents
-from Project_P.FinalApplicationFiles.LLMs.llm import initialize_llm, create_rag_chain
+from FinalApplicationFiles.embeddings.embeddings import initialize_embeddings
+from FinalApplicationFiles.VectorDB.pinecone_setup import setup_pinecone, retrieve_documents
+from FinalApplicationFiles.LLMs.llm import initialize_llm, create_rag_chain
 
 # Load environment variables
 load_dotenv()

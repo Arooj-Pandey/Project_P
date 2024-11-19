@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 from VectorDB.pinecone_setup import PineconeVectorDatabase
-from Project_P.FinalApplicationFiles.embeddings.embeddings import initialize_embeddings
+from FinalApplicationFiles.embeddings.embeddings import initialize_embeddings
 
 """
 This function takes in a list of Chunks and adds them to the Pinecone index. If the index does not exist, it creates a new Pinecone index.
