@@ -35,6 +35,7 @@ def main():
 
     # Initialize the Google Generative AI model
     llm = initialize_llm(gemini_api_key)
+    print(retriever.invoke("Tell me about Swachh Bharat Mission"))
 
     # Create the RAG chain (Retrieval-Augmented Generation)
     rag_chain = create_rag_chain(retriever, llm)
