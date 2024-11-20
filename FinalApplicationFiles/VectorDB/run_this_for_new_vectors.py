@@ -1,8 +1,9 @@
-from Project_P.FinalApplicationFiles.chunker.chunker import chunker
-from Project_P.FinalApplicationFiles.VectorDB.vector_addition import vector_addition
+from FinalApplicationFiles.chunker.Chunker_setup_class import Chunker
+from FinalApplicationFiles.VectorDB.vector_addition import vector_addition
 
 
-
+path = r'D:\Projects\PIB Chatbot\Project_P\ScraperFiles\newFiles'
+chunker  =  Chunker(path)
 
 
 def main():

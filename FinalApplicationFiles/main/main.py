@@ -1,27 +1,37 @@
 # Import necessary libraries
-from dotenv import load_dotenv
+import sys
 import os
-from Project_P.FinalApplicationFiles.embeddings.embeddings import initialize_embeddings # Self-defined function
-from Project_P.FinalApplicationFiles.VectorDB.pinecone_setup import setup_pinecone, retrieve_documents # Self-defined function
-from Project_P.FinalApplicationFiles.LLMs.llm import initialize_llm, create_rag_chain # Self-defined funtions
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
+print(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from dotenv import load_dotenv
+from FinalApplicationFiles.embeddings.embeddings import initialize_embeddings 
+from FinalApplicationFiles.VectorDB.pinecone_setup import PineconeVectorDatabase
+from FinalApplicationFiles.LLMs.llm import initialize_llm, create_rag_chain
 # Load environment variables from .env file
+
 load_dotenv()
 
 # Fetch API keys from environment variables
 pinecone_api_key = os.getenv("PINECONE_API_KEY")  # Pinecone API key
-gemini_api_key = os.getenv("GEMINI_API_KEY")  # Google Generative AI key
+gemini_api_key = os.getenv("GEMINI_API_KEY")
+
+
+
+# PVC.setup_pinecone, PVC.retrieve_documents  # Google Generative AI key
 
 def main():
+
     # Initialize embeddings model
     embeddings = initialize_embeddings()
 
     # Setup Pinecone connection and index
     index_name = "pib"
-    vector_store = setup_pinecone(pinecone_api_key, index_name, embeddings)
+    PVC = PineconeVectorDatabase(pinecone_api_key, index_name, embeddings)
+    vector_store = PVC._setup_pinecone()
 
     # Retrieve documents from the vector store (no vector addition)
-    retriever = retrieve_documents(vector_store)
+    retriever = PVC.retrieve_documents()
 
     # Initialize the Google Generative AI model
     llm = initialize_llm(gemini_api_key)
