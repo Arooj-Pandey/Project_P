@@ -2,11 +2,14 @@ from langchain_google_genai import GoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser 
 from langchain_core.runnables import RunnablePassthrough
+import os
+
 
 def initialize_llm(api_key):
     """
     Initializes and returns the Google Generative AI model with the provided API key.
     """
+    os.environ["GOOGLE_API_KEY"] = api_key
     return GoogleGenerativeAI(
         model="gemini-1.5-flash",  # Model type
         google_api_key=api_key,

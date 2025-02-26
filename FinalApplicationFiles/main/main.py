@@ -14,7 +14,7 @@ load_dotenv()
 
 # Fetch API keys from environment variables
 pinecone_api_key = os.getenv("PINECONE_API_KEY")  # Pinecone API key
-gemini_api_key = os.getenv("GEMINI_API_KEY")
+gemini_api_key = os.getenv("GOOGLE_API_KEY")
 
 
 
@@ -27,11 +27,11 @@ def main():
 
     # Setup Pinecone connection and index
     index_name = "pib"
-    PVC = PineconeVectorDatabase(pinecone_api_key, index_name, embeddings)
-    vector_store = PVC._setup_pinecone()
+    PCVD = PineconeVectorDatabase(pinecone_api_key, index_name, embeddings)
+    vector_store = PCVD.setup_pinecone()
 
     # Retrieve documents from the vector store (no vector addition)
-    retriever = PVC.retrieve_documents()
+    retriever = PCVD.retrieve_documents()
 
     # Initialize the Google Generative AI model
     llm = initialize_llm(gemini_api_key)

@@ -1,8 +1,10 @@
 import streamlit as st
 from dotenv import load_dotenv
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from FinalApplicationFiles.embeddings.embeddings import initialize_embeddings
-from FinalApplicationFiles.VectorDB.pinecone_setup import setup_pinecone, retrieve_documents
+from FinalApplicationFiles.VectorDB.pinecone_setup import PineconeVectorDatabase
 from FinalApplicationFiles.LLMs.llm import initialize_llm, create_rag_chain
 
 # Load environment variables
@@ -11,13 +13,14 @@ load_dotenv()
 # Fetch API keys from environment variables
 pinecone_api_key = os.getenv("PINECONE_API_KEY")  # Pinecone API key
 gemini_api_key = os.getenv("GOOGLE_API_KEY")  # Google Generative AI key
-
+PCVD = PineconeVectorDatabase(pinecone_api_key, "pib", initialize_embeddings())
+PCVD.setup_pinecone()
 # Initialize embeddings and Pinecone only once (to avoid reloading on every interaction)
 @st.cache_resource
 def initialize_system():
     embeddings = initialize_embeddings()
-    vector_store = setup_pinecone(pinecone_api_key, "semanticpib", embeddings)
-    retriever = retrieve_documents(vector_store)
+    #vector_store = PCVD.setup_pinecone()
+    retriever = PCVD.retrieve_documents()
     llm = initialize_llm(gemini_api_key)
     rag_chain = create_rag_chain(retriever, llm)
     return rag_chain, retriever
